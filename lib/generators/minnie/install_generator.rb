@@ -28,6 +28,14 @@ module Minnie
         route "match '/signin' => 'sessions#new', :as => :signin"
         route "match '/signout' => 'sessions#destroy', :as => :signout"
       end
+
+      def update_user
+        if File.exists?('app/models/user.rb')
+          inject_into_class 'app/models/user.rb', User do
+            "has_secure_password"
+          end
+        else
+      end
     end
   end
 end
