@@ -10,7 +10,7 @@ module Minnie
       end
 
       def add_session_routes
-        route "resources :sessions, :only => [:new, :create]"
+        route "resources :sessions, :only => [:new, :create, :destroy]"
         route "match '/signin' => 'sessions#new', :as => :signin"
         route "match '/signout' => 'sessions#destroy', :as => :signout"
       end
