@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Michael McClenaghan"]
   s.email       = ["mike@sideline.ca"]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = %q{Simplest authentication possible}
+  s.description = %q{The simplest that authentication can get while still being useful}
 
   s.rubyforge_project = "minnie"
 
@@ -18,7 +18,5 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
-  # specify any dependencies here; for example:
-  # s.add_development_dependency "rspec"
-  # s.add_runtime_dependency "rest-client"
+  s.add_runtime_dependency('rails',  '>= 3.0')
 end

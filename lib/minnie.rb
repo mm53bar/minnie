@@ -1,5 +1,7 @@
 require "minnie/version"
 
 module Minnie
-  # Your code goes here...
+  autoload :Controller, 'minnie/controller'
+
+  require 'minnie/engine' if defined?(Rails) && Rails::VERSION::MAJOR == 3
 end
