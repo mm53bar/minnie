@@ -6,7 +6,9 @@ module Minnie
       helper_method :current_user
     end
 
-    protected
+    hide_action :authenticate_user!, :sign_in_and_redirect,
+                :sign_out_and_redirect, :current_user,
+                :authenticate
 
     def authenticate_user!
       redirect unless session[:user_id] && User.first(:conditions => {:id => session[:user_id]})
@@ -30,7 +32,7 @@ module Minnie
 
     def authenticate(email, password)
       user = User.find_by_email(email)
-      return @user && @user.authenticate(password)        
+      return user && user.authenticate(password)        
     end
 
     private

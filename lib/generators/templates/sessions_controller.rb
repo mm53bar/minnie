@@ -9,6 +9,7 @@ class SessionsController < ApplicationController
     if @user = authenticate(params[:user][:email], params[:user][:password])
       sign_in_and_redirect(@user)  
     else  
+      @user = User.new
       flash.now[:error] = I18n.t(:invalid_login, :scope => 'app.sessions')
       render "new"  
     end  
