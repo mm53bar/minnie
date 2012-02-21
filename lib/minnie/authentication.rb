@@ -31,7 +31,7 @@ module Minnie
     end
 
     def authenticate(email, password)
-      user = User.find_by_email(email)
+      user = User.first(conditions: {email: params[:user][:email]})
       return user && user.authenticate(password)        
     end
 
