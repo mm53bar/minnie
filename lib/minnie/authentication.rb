@@ -4,11 +4,11 @@ module Minnie
 
     included do
       helper_method :current_user
-    end
 
-    hide_action :authenticate_user!, :sign_in_and_redirect,
-                :sign_out_and_redirect, :current_user,
-                :authenticate
+      hide_action :authenticate_user!, :sign_in_and_redirect,
+                  :sign_out_and_redirect, :current_user,
+                  :authenticate      
+    end
 
     def authenticate_user!
       redirect unless session[:user_id] && User.first(:conditions => {:id => session[:user_id]})
