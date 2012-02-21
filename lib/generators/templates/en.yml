@@ -1,0 +1,6 @@
+en:
+  app:
+    sessions:
+      signed_in: 'Signed in successfully.'
+      signed_out: 'Signed out successfully.'
+      invalid_login: 'Invalid email or password.'
