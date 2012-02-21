@@ -34,7 +34,7 @@ module Minnie
           inject_into_class 'app/models/user.rb', User do
             "has_secure_password"
           end
-        else
+        end
       end
     end
   end
