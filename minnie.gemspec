@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.version     = Minnie::VERSION
   s.authors     = ["Michael McClenaghan"]
   s.email       = ["mike@sideline.ca"]
-  s.homepage    = ""
+  s.homepage    = "https://github.com/mm53bar/minnie"
   s.summary     = %q{Simplest authentication possible}
   s.description = %q{The simplest that authentication can get while still being useful}
 
