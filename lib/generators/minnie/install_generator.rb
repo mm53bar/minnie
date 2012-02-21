@@ -32,7 +32,7 @@ module Minnie
       def update_user
         if File.exists?('app/models/user.rb')
           inject_into_class 'app/models/user.rb', User do
-            "has_secure_password"
+            "  has_secure_password\n"
           end
         end
       end
