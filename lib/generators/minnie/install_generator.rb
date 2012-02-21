@@ -30,10 +30,11 @@ module Minnie
       end
 
       def update_user
-        if File.exists?('app/models/user.rb')
-          inject_into_class 'app/models/user.rb', User do
-            "  has_secure_password\n"
-          end
+        unless File.exists?('app/models/user.rb')
+          generate("model", "user email:string password_digest:string")
+        end
+        inject_into_class 'app/models/user.rb', User do
+          "  has_secure_password\n\n  attr_accessible :email, :password\n  validates_presence_of :email\n  validates_presence_of :password, :on => :create\n\n"
         end
       end
     end
