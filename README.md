@@ -11,16 +11,6 @@ sessions_controller and locales
 
      bundle exec rails generate minnie:install
 
-Include minnie's authentication in application_controller.rb and set it to require
-authentication for every controller
-
-     class ApplicationController
-       include Minnie::Authentication
-
-       before_filter :authenticate_user!
-       
-       ...
-
 Generate a user.rb that is set up for has_secure_password
 
      bundle exec rails g model user email:string password_digest:string

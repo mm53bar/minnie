@@ -5,6 +5,12 @@ module Minnie
       source_root File.expand_path('../templates', __FILE__)
       desc "Configures your app with the basics for Minnie to execute."
 
+      def install
+        inject_into_class "app/controllers/application_controller.rb", ApplicationController do
+          "  include Minnie::Authentication\n\n  before_filter :authenticate_user!\n"       
+        end
+      end
+
       def copy_sessions_controller
         copy_file "sessions_controller.rb", "app/controllers/sessions_controller.rb"
       end
