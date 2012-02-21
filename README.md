@@ -6,6 +6,11 @@ Add minnie to your Gemfile
 
      gem 'minnie'
 
+Run minnie's generator to get some basic bootstrapping for your routes,
+sessions_controller and locales
+
+     bundle exec rails generate minnie:install
+
 Include minnie's authentication in application_controller.rb and set it to require
 authentication for every controller
 
@@ -16,28 +21,6 @@ authentication for every controller
        
        ...
 
-Create a sessions_controller.rb
-
-     class SessionsController < ApplicationController  
-       skip_before_filter :authenticate_user!, :except => [:destroy]
-
-       def new  
-         @user = User.new
-       end  
-
-       def create  
-         if @user = authenticate(params[:user][:email], params[:user][:password])
-           sign_in_and_redirect(@user)  
-         else  
-           flash.now[:error] = I18n.t(:invalid_login, :scope => 'app.sessions')
-           render "new"  
-         end  
-       end  
-
-       def destroy  
-         sign_out_and_redirect
-       end  
-     end
 
 And a login form at app/views/sessions/new.html.erb (this one uses simple_form)
 
