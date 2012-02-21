@@ -10,9 +10,9 @@ module Minnie
       end
 
       def copy_session_form
-        copy_file "sessions/new.html.erb", "app/views/sessions"
+        copy_file "sessions/new.html.erb", "app/views/sessions/new.html.erb"
       end
-      
+
       def copy_locale
         copy_file "en.yml", "config/locales/minnie.en.yml"
       end
