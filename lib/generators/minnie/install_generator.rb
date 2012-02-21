@@ -5,6 +5,10 @@ module Minnie
       source_root File.expand_path('../templates', __FILE__)
       desc "Configures your app with the basics for Minnie to execute."
 
+      def copy_sessions_controller
+        copy_file "sessions_controller.rb", "app/controllers/sessions_controller.rb"
+      end
+
       def copy_locale
         copy_file "en.yml", "config/locales/minnie.en.yml"
       end

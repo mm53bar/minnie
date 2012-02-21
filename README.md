@@ -2,10 +2,9 @@
 
 ###Install
 
-Add minnie and bcrypt-ruby to your Gemfile
+Add minnie to your Gemfile
 
      gem 'minnie'
-     gem 'bcrypt-ruby'
 
 Include minnie's authentication in application_controller.rb and set it to require
 authentication for every controller
