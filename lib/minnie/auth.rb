@@ -1,17 +1,16 @@
 module Minnie
-  module Authentication
+  module Auth
     extend ActiveSupport::Concern    
 
     included do
       helper_method :current_user
 
       hide_action :authenticate_user!, :sign_in_and_redirect,
-                  :sign_out_and_redirect, :current_user,
-                  :authenticate      
+                  :sign_out_and_redirect, :current_user
     end
 
     def authenticate_user!
-      redirect unless session[:user_id] && User.first(:conditions => {:id => session[:user_id]})
+      redirect unless session[:user_id] && ::User.first(:conditions => {:id => session[:user_id]})
     end  
 
     def sign_in_and_redirect(user, options = {})
@@ -27,12 +26,7 @@ module Minnie
     end
 
     def current_user
-      @current_user ||= User.first(:conditions => {:id => session[:user_id]}) if session[:user_id]
-    end
-
-    def authenticate(email, password)
-      user = User.first(conditions: {email: params[:user][:email]})
-      return user && user.authenticate(password)        
+      @current_user ||= ::User.first(:conditions => {:id => session[:user_id]}) if session[:user_id]
     end
 
     private

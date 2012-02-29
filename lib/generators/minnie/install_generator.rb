@@ -7,8 +7,8 @@ module Minnie
 
       def install
         inject_into_class "app/controllers/application_controller.rb", ApplicationController do
-          "  include Minnie::Authentication\n\n  before_filter :authenticate_user!\n"       
-        end
+          "  include Minnie::Auth\n\n  before_filter :authenticate_user!\n"       
+        end      
       end
 
       def copy_sessions_controller
@@ -33,8 +33,8 @@ module Minnie
         unless File.exists?('app/models/user.rb')
           generate("model", "user email:string password_digest:string")
         end
-        inject_into_class 'app/models/user.rb', User do
-          "  has_secure_password\n\n  attr_accessible :email, :password\n  validates_presence_of :email\n  validates_presence_of :password, :on => :create\n\n"
+        inject_into_class "app/models/user.rb", ::User do
+          "  include Minnie::User::Auth\n\n  has_secure_password\n\n  attr_accessible :email, :password\n  validates_presence_of :email\n  validates_presence_of :password, :on => :create\n\n"
         end
       end
     end

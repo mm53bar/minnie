@@ -1,5 +1,8 @@
 require "minnie/version"
 
 module Minnie
-  autoload :Authentication, 'minnie/authentication'
+  autoload :Auth, 'minnie/auth'
+  module User
+    autoload :Auth, 'minnie/user/auth'
+  end
 end

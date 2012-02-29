@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   end  
 
   def create  
-    if @user = authenticate(params[:user][:email], params[:user][:password])
+    if @user = User.authenticate(params[:user][:email], params[:user][:password])
       sign_in_and_redirect(@user)  
     else  
       @user = User.new
