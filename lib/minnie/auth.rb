@@ -10,7 +10,7 @@ module Minnie
     end
 
     def authenticate_user!
-      redirect unless session[:user_id] && User.first(:conditions => {:id => session[:user_id]})
+      redirect unless session[:user_id] && ::User.first(:conditions => {:id => session[:user_id]})
     end  
 
     def sign_in_and_redirect(user, options = {})
@@ -26,7 +26,7 @@ module Minnie
     end
 
     def current_user
-      @current_user ||= User.first(:conditions => {:id => session[:user_id]}) if session[:user_id]
+      @current_user ||= ::User.first(:conditions => {:id => session[:user_id]}) if session[:user_id]
     end
 
     private

@@ -5,7 +5,7 @@ module Minnie
 
       module ClassMethods
         def authenticate(email, password)
-          user = User.first(conditions: {email: email})
+          user = self.first(conditions: {email: email})
           return user && user.authenticate(password)        
         end
       end
