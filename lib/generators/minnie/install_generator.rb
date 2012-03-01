@@ -28,6 +28,10 @@ module Minnie
         route "match '/signin' => 'sessions#new', :as => :signin"
         route "match '/signout' => 'sessions#destroy', :as => :signout"
       end
+
+      def show_readme
+        readme "README" if behavior == :invoke
+      end      
     end
   end
 end

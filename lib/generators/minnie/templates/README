@@ -1,3 +1,5 @@
+===============================================================================
+
                            c<> ,
                          ,CCC cC>       ...:  ...
                         ,CCCC'CC>   .::::`.ccCCCCC
@@ -24,3 +26,27 @@
              `"??$$$$$$$???",;d??$$$F".:.
                     : =cddd??" `" . :::::::
                  .:`.:::: :::::'.:::::::::::
+
+Congratulations! You've now set up Minnie for your authentication.
+
+If you're just starting out, here's a few more things you can do:
+
+  1. Set up your User model using email/password authentication.  Just run the
+     following:
+
+       bundle exec rails generate minnie:install:user
+
+     That will configure an existing User model or generate a new one if you 
+     don't have one yet.
+
+  2. Ensure you have defined root_url to *something* in your config/routes.rb.
+     For example:
+
+       root :to => "home#index"
+
+  3. Ensure you have flash messages in app/views/layouts/application.html.erb.
+     For example:
+
+       <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+
