@@ -34,7 +34,7 @@ module Minnie
     def redirect
       store_location!
       store_params!
-      redirect_to new_session_path
+      redirect_to sign_in_path
     end
   
     def store_location!
@@ -51,6 +51,10 @@ module Minnie
 
     def stored_params
       session[:params] || {}
+    end
+
+    def sign_in_path
+      new_session_path
     end
 
     def after_sign_in_path
