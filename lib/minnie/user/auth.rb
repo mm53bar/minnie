@@ -1,7 +1,9 @@
 module Minnie
   module User
     module Auth
-      extend ActiveSupport::Concern    
+      def self.included(klass)
+        klass.extend ClassMethods
+      end
 
       module ClassMethods
         def authenticate(email, password)

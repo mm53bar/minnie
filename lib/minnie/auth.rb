@@ -1,12 +1,9 @@
 module Minnie
   module Auth
-    extend ActiveSupport::Concern    
-
-    included do
-      helper_method :current_user
-
-      hide_action :authenticate_user!, :sign_in_and_redirect,
-                  :sign_out_and_redirect, :current_user
+    def self.included(klass)
+      klass.send :helper_method, :current_user if klass.respond_to? :helper_method
+      klass.send :hide_action, :authenticate_user!, :sign_in_and_redirect,
+                  :sign_out_and_redirect, :current_user if klass.respond_to? :hide_action
     end
 
     def authenticate_user!
