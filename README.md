@@ -6,7 +6,7 @@ Heavily inspired by [Ryan Bates' Railscast on Authentication from Scratch](http:
 
 Then I had to adapt the code for email/password logins.  And then LDAP authentication came up.  Eventually, I had refactored it down to the basics that could be reused multiple times.
 
-But copying and pasting a gist into multiple apps gets tiresome quickly. So Minnie was born. I've added email/password authentication as the default strategy for Minnie. But feel free to also check out the [OmniAuth](https://github.com/mm53bar/minnie-omniauth-sample) and [LDAP](https://github.com/mm53bar/minnie-ldap-sample) strategies.
+But copying and pasting a gist into multiple apps gets tiresome quickly. So Minnie was born. I've added email/password authentication as the default strategy for Minnie. But feel free to also check out the [OmniAuth](https://github.com/mm53bar/minnie-omniauth) and [LDAP](https://github.com/mm53bar/minnie-ldap) strategies.
 
 ###Install
 
