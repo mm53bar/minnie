@@ -4,7 +4,9 @@ After working with [Devise](https://github.com/plataformatec/devise) and [Cleara
 
 Heavily inspired by [Ryan Bates' Railscast on Authentication from Scratch](http://railscasts.com/episodes/250-authentication-from-scratch), I wrote just enough code to have the authentication working.  I pulled a few other ideas out of Devise and Clearance and had [a decent looking gist](https://gist.github.com/753507) after a while.
 
-But copying and pasting a gist into multiple apps gets tiresome quickly. So Minnie was born. Enjoy!
+Then I had to adapt the code for email/password logins.  And then LDAP authentication came up.  Eventually, I had refactored it down to the basics that could be reused multiple times.
+
+But copying and pasting a gist into multiple apps gets tiresome quickly. So Minnie was born. I've added email/password authentication as the default strategy for Minnie. But feel free to also check out the [OmniAuth](https://github.com/mm53bar/minnie-omniauth-sample) and [LDAP](https://github.com/mm53bar/minnie-ldap-sample) strategies.
 
 ###Install
 
