@@ -1,5 +1,11 @@
 #Minnie
 
+After working with [Devise](https://github.com/plataformatec/devise) and [Clearance](https://github.com/thoughtbot/clearance), I started to play with [OmniAuth](https://github.com/intridea/omniauth). At the time, OmniAuth didn't have much support amongst the auth gems so I wrote my authentication code for it.  
+
+Heavily inspired by [Ryan Bates' Railscast on Authentication from Scratch](http://railscasts.com/episodes/250-authentication-from-scratch), I wrote just enough code to have the authentication working.  I pulled a few other ideas out of Devise and Clearance and had [a decent looking gist](https://gist.github.com/753507) after a while.
+
+But copying and pasting a gist into multiple apps gets tiresome quickly. So Minnie was born. Enjoy!
+
 ###Install
 
 Add minnie to your Gemfile
