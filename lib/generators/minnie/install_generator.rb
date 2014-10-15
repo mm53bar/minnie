@@ -7,8 +7,8 @@ module Minnie
 
       def install
         inject_into_class "app/controllers/application_controller.rb", ApplicationController do
-          "  include Minnie::Auth\n\n  before_filter :authenticate_user!\n"       
-        end      
+          "  include Minnie::Auth\n\n  before_filter :authenticate!\n"
+        end
       end
 
       def copy_sessions_controller
@@ -24,14 +24,14 @@ module Minnie
       end
 
       def add_session_routes
-        route "resources :sessions, :only => [:new, :create, :destroy]"
-        route "match '/signin' => 'sessions#new', :as => :signin"
-        route "match '/signout' => 'sessions#destroy', :as => :signout"
+        route "resources :sessions, only: [:new, :create, :destroy]"
+        route "match '/signin' => 'sessions#new', as: :signin"
+        route "match '/signout' => 'sessions#destroy', as: :signout"
       end
 
       def show_readme
         readme "README" if behavior == :invoke
-      end      
+      end
     end
   end
 end

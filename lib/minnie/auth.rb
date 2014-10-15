@@ -1,29 +1,35 @@
 module Minnie
   module Auth
     def self.included(klass)
-      klass.send :helper_method, :current_user if klass.respond_to? :helper_method
-      klass.send :hide_action, :authenticate_user!, :sign_in_and_redirect,
+      klass.send :helper_method, :current_user, :authenticated?,
+                 :signed_in? if klass.respond_to? :helper_method
+      klass.send :hide_action, :authenticate!, :sign_in_and_redirect,
                   :sign_out_and_redirect, :current_user if klass.respond_to? :hide_action
     end
 
-    def authenticate_user!
-      redirect unless session[:user_id] && ::User.first(:conditions => {:id => session[:user_id]})
-    end  
+    def authenticate!
+      redirect unless authenticated?
+    end
+
+    def authenticated?
+      session[:auth_token] && ::User.where(id: session[:auth_token]).first
+    end
+    alias_method :signed_in?, :authenticated?
 
     def sign_in_and_redirect(user, options = {})
-      session[:user_id] = user.id
-      options.reverse_merge!({:notice => I18n.t(:signed_in, :scope => 'app.sessions')})
+      session[:auth_token] = user.id
+      options.reverse_merge!({notice: I18n.t(:signed_in, scope: 'app.sessions')})
       redirect_to after_sign_in_path, options
     end
-  
+
     def sign_out_and_redirect(options = {})
       reset_session
-      options.reverse_merge!({:notice => I18n.t(:signed_out, :scope => 'app.sessions')})
+      options.reverse_merge!({notice: I18n.t(:signed_out, scope: 'app.sessions')})
       redirect_to after_sign_out_path, options
     end
 
     def current_user
-      @current_user ||= ::User.first(:conditions => {:id => session[:user_id]}) if session[:user_id]
+      @current_user ||= ::User.where(id: session[:auth_token]).first if authenticated?
     end
 
     private
@@ -33,15 +39,15 @@ module Minnie
       store_params!
       redirect_to sign_in_path
     end
-  
+
     def store_location!
       session[:return_to] = request.fullpath if request.get?
     end
-  
+
     def stored_location
       session.delete("return_to")
     end
-  
+
     def store_params!
       session[:params] = params
     end
@@ -57,7 +63,7 @@ module Minnie
     def after_sign_in_path
       stored_location || root_path
     end
-  
+
     def after_sign_out_path
       root_path
     end

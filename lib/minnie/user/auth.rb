@@ -7,8 +7,8 @@ module Minnie
 
       module ClassMethods
         def authenticate(email, password)
-          user = self.first(conditions: {email: email})
-          return user && user.authenticate(password)        
+          user = self.where(email: email).first
+          return user && user.authenticate(password)
         end
       end
     end

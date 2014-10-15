@@ -1,6 +1,6 @@
-<h2>Sign in</h2>  
-  
-<%= simple_form_for @user, :url => sessions_path do |f| %>  
+<h2>Sign in</h2>
+
+<%= simple_form_for @user, url: sessions_path do |f| %>  
   <%= f.error_notification %>
 
   <div class="inputs">
@@ -10,4 +10,4 @@
   <div class="actions">
     <%= f.button :submit, 'Sign In' %>
   </div>
-<% end %> 
+<% end %>
