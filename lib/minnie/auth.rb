@@ -12,24 +12,29 @@ module Minnie
     end
 
     def authenticated?
-      session[:auth_token] && ::User.where(id: session[:auth_token]).first
+      current_user.present?
     end
     alias_method :signed_in?, :authenticated?
 
     def sign_in_and_redirect(user, options = {})
-      session[:auth_token] = user.id
+      remember(user)
       options.reverse_merge!({notice: I18n.t(:signed_in, scope: 'app.sessions')})
       redirect_to after_sign_in_path, options
     end
 
     def sign_out_and_redirect(options = {})
-      reset_session
+      forget_user
       options.reverse_merge!({notice: I18n.t(:signed_out, scope: 'app.sessions')})
       redirect_to after_sign_out_path, options
     end
 
     def current_user
-      @current_user ||= ::User.where(id: session[:auth_token]).first if authenticated?
+      @current_user ||= ::User.find_by(id: cookies.signed[:user_id])
+      if @current_user && BCrypt::Password.new(@current_user.remember_digest) == cookies[:remember_token]
+        @current_user
+      else
+        nil
+      end
     end
 
     private
@@ -38,6 +43,20 @@ module Minnie
       store_location!
       store_params!
       redirect_to sign_in_path
+    end
+
+    def remember(user)
+      remember_token = SecureRandom.urlsafe_base64
+      user.update(remember_digest: BCrypt::Password.create(remember_token))
+      cookies.permanent.signed[:user_id] = user.id
+      cookies.permanent[:remember_token] = remember_token
+    end
+
+    def forget_user
+      reset_session
+      @current_user = nil
+      cookies.delete(:user_id)
+      cookies.delete(:remember_token)
     end
 
     def store_location!
