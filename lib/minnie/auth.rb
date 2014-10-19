@@ -29,11 +29,13 @@ module Minnie
     end
 
     def current_user
-      @current_user ||= ::User.find_by(id: cookies.signed[:user_id])
-      if @current_user && BCrypt::Password.new(@current_user.remember_digest) == cookies[:remember_token]
-        @current_user
-      else
-        nil
+      @current_user ||= begin
+        user = ::User.find_by(id: cookies.signed[:user_id])
+        if user && BCrypt::Password.new(user.remember_digest) == cookies[:remember_token]
+          user
+        else
+          nil
+        end
       end
     end
 
@@ -42,6 +44,7 @@ module Minnie
     def redirect
       store_location!
       store_params!
+      forget_user
       redirect_to sign_in_path
     end
 
