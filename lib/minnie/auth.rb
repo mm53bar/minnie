@@ -29,14 +29,8 @@ module Minnie
     end
 
     def current_user
-      @current_user ||= begin
-        user = ::User.find_by(id: cookies.signed[:user_id])
-        if user && BCrypt::Password.new(user.remember_digest) == cookies[:remember_token]
-          user
-        else
-          nil
-        end
-      end
+      @current_user ||= ::User.find_by(id: cookies.signed[:user_id],
+                                       remember_token: cookies[:remember_token])
     end
 
     private
@@ -49,10 +43,10 @@ module Minnie
     end
 
     def remember(user)
-      remember_token = SecureRandom.urlsafe_base64
-      user.update(remember_digest: BCrypt::Password.create(remember_token))
-      cookies.permanent.signed[:user_id] = user.id
-      cookies.permanent[:remember_token] = remember_token
+        remember_token = user.remember_token || SecureRandom.urlsafe_base64
+        user.update(remember_token: remember_token)
+        cookies.permanent.signed[:user_id] = user.id
+        cookies.permanent[:remember_token] = remember_token
     end
 
     def forget_user
