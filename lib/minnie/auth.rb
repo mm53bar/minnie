@@ -42,9 +42,9 @@ module Minnie
     private
 
     def redirect
+      forget_user
       store_location!
       store_params!
-      forget_user
       redirect_to sign_in_path
     end
 
